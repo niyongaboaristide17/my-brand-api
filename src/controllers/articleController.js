@@ -30,7 +30,14 @@ export class ArticleController {
     async getArticle(req, res, next) {
         try {
             const article = await ArticleServices.getArticle(req.params.id)
-            res.send(article)
+            if (article == null || article === undefined) {
+                res.status(404).send({
+                    error: 'Article not found'
+                })
+            } else {
+                res.send(article)
+            }
+
         } catch (error) {
             res.status(404)
             res.send({ error: 'Something went wrong' })
@@ -38,6 +45,7 @@ export class ArticleController {
     }
     async updateArticle(req, res, next) {
         try {
+
             const data = {}
             if (req.body.title) {
                 data['title'] = req.body.title
@@ -62,8 +70,16 @@ export class ArticleController {
     }
     async deleteArticle(req, res, next) {
         try {
-            await ArticleServices.deleteArticle(req.params.id)
-            res.status(204).send()
+            const article = await ArticleServices.getArticle(req.params.id)
+            if (article == null || article === undefined) {
+                res.status(404).send({
+                    error: 'Article not found'
+                })
+            } else {
+                await ArticleServices.deleteArticle(req.params.id)
+                res.status(204).send()
+            }
+
         } catch {
             res.status(404)
             res.send({ error: "Article doesn't exist!" })

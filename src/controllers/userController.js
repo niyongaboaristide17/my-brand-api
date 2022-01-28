@@ -21,7 +21,10 @@ export class UserController {
             await UserServices.createUser(user)
             res.send(user)
         } catch (error) {
-            console.log(error);
+            res.status(500)
+            res.send({
+                error: 'User already exist'
+            })
         }
     }
 

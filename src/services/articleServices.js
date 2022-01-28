@@ -1,6 +1,7 @@
 import Article from "../models/article"
 
 export class ArticleServices {
+
     static async createArticle(data) {
         return await data.save()
     }
