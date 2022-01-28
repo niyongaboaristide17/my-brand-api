@@ -21,8 +21,7 @@ export class UserController {
             await UserServices.createUser(user)
             res.send(user)
         } catch (error) {
-            res.status(500)
-            res.send({
+            res.status(500).send({
                 error: 'User already exist'
             })
         }
