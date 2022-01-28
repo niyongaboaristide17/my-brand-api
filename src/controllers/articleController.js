@@ -14,8 +14,7 @@ export class ArticleController {
             res.send(article)
 
         } catch (error) {
-            res.status(404)
-            res.send({ error: 'Article no created check provided content' })
+            res.status(404).send({ error: 'Article no created check provided content' })
         }
     }
     async getAllArticles(req, res, next) {
@@ -23,8 +22,7 @@ export class ArticleController {
             const articles = await ArticleServices.getAllArticles()
             res.send(articles)
         } catch (error) {
-            res.status(404)
-            res.send({ error: 'Something went wrong' })
+            res.status(404).send({ error: 'Something went wrong' })
         }
     }
     async getArticle(req, res, next) {
@@ -39,8 +37,7 @@ export class ArticleController {
             }
 
         } catch (error) {
-            res.status(404)
-            res.send({ error: 'Something went wrong' })
+            res.status(404).send({ error: 'Something went wrong' })
         }
     }
     async updateArticle(req, res, next) {
@@ -64,25 +61,18 @@ export class ArticleController {
             const article = await ArticleServices.updateArticle(req.params.id, data)
             res.send(article)
         } catch (error) {
-            res.status(404)
-            res.send({ error: "Article doesn't exist!" })
+            res.status(404).send({ error: "Article doesn't exist!" })
         }
     }
     async deleteArticle(req, res, next) {
         try {
             const article = await ArticleServices.getArticle(req.params.id)
-            if (article == null || article === undefined) {
-                res.status(404).send({
-                    error: 'Article not found'
-                })
-            } else {
-                await ArticleServices.deleteArticle(req.params.id)
-                res.status(204).send()
-            }
+            await ArticleServices.deleteArticle(req.params.id)
+            res.status(204).send()
 
-        } catch {
-            res.status(404)
-            res.send({ error: "Article doesn't exist!" })
+
+        } catch (error) {
+            res.status(404).send({ error: "Article doesn't exist!" })
         }
     }
 }
