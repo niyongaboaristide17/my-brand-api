@@ -16,7 +16,6 @@ export class ArticleController {
             res.send(article)
 
         } catch (error) {
-            console.log(error);
             res.status(404).send({ error: 'Article no created check provided content' })
         }
     }
