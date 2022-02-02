@@ -14,6 +14,7 @@ export class UserController {
 
         try {
             const exit = await UserServices.userExist(req.body.email)
+            console.log(req.body.email);
             if (exit) {
                 console.log(exit);
                 res.status(409).json({ status: 409, message: "User with this email already exist. use different one" })
