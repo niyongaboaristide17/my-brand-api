@@ -15,14 +15,9 @@ route.get('/',new ArticleController().getAllArticles)
 
 route.post('/', upload.single('image'), articleValidation, new ArticleController().createArticle)
 
-route.get('/',new ArticleController().getAllArticles)
-
-route.post('/',upload.single('image'), new ArticleController().createArticle)
-
-
 route.get('/:id', new ArticleController().getArticle)
 
-route.patch('/:id',articleValidation, new ArticleController().updateArticle)
+route.patch('/:id', articleValidation, new ArticleController().updateArticle)
 
 route.delete('/:id', new ArticleController().deleteArticle)
 
