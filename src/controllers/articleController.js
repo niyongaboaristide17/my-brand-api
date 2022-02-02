@@ -2,6 +2,7 @@ import { uploadFile } from "../helpers/fileUpload";
 import Article from "../models/article";
 import { ArticleServices } from "../services/articleServices";
 
+
 export class ArticleController {
     // TODO Don't access database from this file you only needs
     async createArticle(req, res, next) {
@@ -16,7 +17,6 @@ export class ArticleController {
             res.send(article)
 
         } catch (error) {
-
             res.status(404).send({ error: 'Article no created check provided content' })
         }
     }
