@@ -2,6 +2,7 @@ import { uploadFile } from "../helpers/fileUpload";
 import Article from "../models/article";
 import { ArticleServices } from "../services/articleServices";
 
+
 export class ArticleController {
     // TODO Don't access database from this file you only needs
     async createArticle(req, res, next) {
