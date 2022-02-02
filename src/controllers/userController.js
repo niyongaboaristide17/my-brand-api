@@ -26,12 +26,12 @@ export class UserController {
                     email: req.body.email
                 })
                 const createdUser = await UserServices.createUser(user)
-                res.send(createdUser)
+                res.status(201).send(createdUser)
             }
             
         } catch (error) {
             console.log(error);
-            res.status(500).send({
+            res.status(406).send({
                 error: 'User already exist'
             })
         }
@@ -42,7 +42,7 @@ export class UserController {
             const users = await UserServices.getAllUsers()
             res.send(users)
         } catch (error) {
-            console.log(error);
+            res.status(404).send({error: 'Resources not found'})
         }
 
     }
@@ -64,7 +64,7 @@ export class UserController {
             }
 
         } catch (error) {
-            console.log(error)
+            res.status(404).send({error: 'Resources not found!'})
         }
     }
 
@@ -73,7 +73,7 @@ export class UserController {
             const user = await UserServices.getUser(req.params.id)
             res.send(user)
         } catch (error) {
-            console.log(error);
+            res.status(404).send({error: error})
         }
     }
     updateUser(req, res, next) {}
