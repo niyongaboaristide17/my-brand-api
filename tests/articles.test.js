@@ -11,42 +11,32 @@ let articleTest
 describe('ARTICLE END-POINT-TEST', () => {
 
     before('POPULATE ARTICLES', (done) => {
-        const article1 = new Article({
-            title: 'article test title',
-            content: 'article test content',
-            image: 'https://picsum.photos/id/237/200/300'
-        })
-
-        article1.save()
-
-        const article2 = new Article({
-            title: 'article2 test title',
-            content: 'article test content',
-            image: 'https://picsum.photos/id/237/200/300'
-        })
         
-        const setArticleTest = async function(){
+        const populate = async function(){
+            const article1 = new Article({
+                title: 'article test title',
+                content: 'article test content',
+                image: 'https://picsum.photos/id/237/200/300'
+            })
+    
+            article1.save()
+    
+            const article2 = new Article({
+                title: 'article2 test title',
+                content: 'article test content',
+                image: 'https://picsum.photos/id/237/200/300'
+            })
             
-            articleTest = await article2.save()
+            const setArticleTest = async function(){
+                
+                articleTest = await article2.save()
+            }
+    
+            await setArticleTest()
         }
 
-        setArticleTest()
         done()
     });
-
-    // it('ARTICLE SHOULD BE CREATED', (done) => {
-    //     request(app)
-    //         .post("/api/v1/articles")
-    //         .send({
-    //             title: 'test title',
-    //             content: 'test content',
-    //             image: 'https://picsum.photos/id/237/200/300'
-    //         })
-    //         .end((err, res) => {
-    //             expect(res.statusCode).to.equal(200);
-    //             done();
-    //         });
-    // });
 
     it('SHOULD GET ALL ARTICLE', (done) => {
         request(app)
