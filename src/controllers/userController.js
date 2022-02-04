@@ -51,7 +51,6 @@ export class UserController {
     async login(req, res, next) {
         try {
             const exist =  await UserServices.userExist(req.body.email)
-            console.log(exist);
             if (exist) {
                 const valid = await comparePassword(req.body.password, exist.password)
                 if (!valid) {
