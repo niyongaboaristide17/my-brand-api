@@ -31,6 +31,15 @@ describe('ARTICLE END-POINT-TEST', () => {
     });
 
 
+    it('SHOULD GET MESSAGE', (done) => {
+        request(app)
+            .get("/")
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(404)
+                done()
+            })
+    });
+
     it('SHOULD GET ALL ARTICLES', (done) => {
         request(app)
             .get("/api/v1/articles")

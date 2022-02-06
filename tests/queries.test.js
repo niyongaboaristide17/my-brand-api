@@ -81,6 +81,15 @@ describe('QUERY END-POINT-TEST', () => {
             })
     });
 
+    it('SHOULD GET ALL QUERY FAIL', (done) => {
+        request(app)
+            .get("/api/v1/querie")
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(404)
+                done()
+            })
+    });
+
     it('SHOULD GET ONE QUERY', (done) => {
         request(app)
             .get(`/api/v1/queries/${queryTest._id}`)

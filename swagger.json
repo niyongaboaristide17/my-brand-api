@@ -331,13 +331,22 @@
         "Queries": {
             "type": "object",
             "properties": {
-                "senderName": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
+                
+                "sender":{
+                    "type":"object",
+                    "properties":{
+                        "name": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "message": {
+                    "type": "string"
+                },
+                "location": {
                     "type": "string"
                 }
             }
