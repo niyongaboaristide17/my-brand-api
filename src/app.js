@@ -1,16 +1,17 @@
 import express from "express"
 import mongoose from "mongoose"
 import routes from "./routes"
+
 import morgan from "morgan";
 import cors from "cors";
 
 import swaggerUi from "swagger-ui-express"
-import swaggerJsDoc from "swagger-jsdoc"
+// import swaggerJsDoc from "swagger-jsdoc"
+
+import swaggerDocument from '../swagger.json'
 
 
 import 'dotenv/config'
-import { swaggerOptions } from "./swagger";
-
 
 
 const app = express()
@@ -27,12 +28,20 @@ const server = async () => {
             await mongoose.connect(process.env.PRODUCTION_DB, { useNewUrlParser: true })
         }
 
-        app.use(express.json())
-        const swaggerSpec = swaggerJsDoc(swaggerOptions);
-        app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-        app.use(morgan("dev"));
+        app.use(express.json());
         app.use(cors());
-        app.use("/api/v1/", routes)
+        app.use(morgan("dev"));
+
+        app.get("/", (req, res) => {
+            res.json({ message: "Welcome to my the API" });
+        });
+        app.use("/api/v1/", routes);
+        app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+        app.use("*", (req, res, next) => {
+            res.status(404).json({
+                error: "NOT FOUND",
+            });
+        });
         app.listen(port, () => {
             console.log(`The server is running on port ${port}`)
         })
