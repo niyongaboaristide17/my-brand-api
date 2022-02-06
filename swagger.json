@@ -24,6 +24,9 @@
         {
             "name": "Queries",
             "description": "Queries Operations"
+        },{
+            "name": "Comments",
+            "description": "Comments Operations"
         }
     ],
     "servers": [
@@ -297,6 +300,53 @@
                     }
                 }
             }
+        },
+        "/api/v1/articles/{id}/comments":{
+            "post":{
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create article comments",
+                "description": "Sends comments to the article.",
+                "operationId": "postComments",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Comment Id",
+                        "required": true
+                    },{
+                        "in": "body",
+                        "name": "Comment",
+                        "description": "Comment on article",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#/definitions/Comments"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    }
+                }
+            },
+            "get":{
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "get article comments",
+                "description": "get comments of an article.",
+                "operationId": "getComments",
+                "parameters": [
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -349,6 +399,17 @@
                 "location": {
                     "type": "string"
                 }
+            }
+        },
+        "Comments":{
+            "type":"object",
+            "properties":{
+                    "sender": {
+                        "type": "string"
+                    },
+                    "comment":{
+                        "type": "string"
+                    }
             }
         }
     }
