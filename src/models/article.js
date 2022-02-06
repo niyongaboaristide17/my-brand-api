@@ -6,7 +6,10 @@ const articleSchema = mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     image: String,
     likes: { type: Number, default: 0 },
-    created_on: { type: Date, default: Date.now }
+    created_on: { type: Date, default: Date.now },
+    comments : [
+        {type: mongoose.Schema.Types.ObjectId,ref:'Comment'}
+    ]
 })
 const Article = mongoose.model('Article', articleSchema)
 export default Article
