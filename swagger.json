@@ -287,12 +287,7 @@
                 "description": "Retrieve all submitted queries",
                 "operationId": "getQueries",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Authorization",
-                        "required": true
-                    }
+
                 ],
                 "responses": {
                     "200": {
