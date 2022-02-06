@@ -37,4 +37,9 @@ export class ArticleServices {
     static async deleteArticle(id) {
         return await Article.deleteOne({ _id: id })
     }
+
+    static async commentsOnArticle(id){
+        return await Article.findById(id).populate('comments')
+    }
+
 }

@@ -1,6 +1,8 @@
 import { uploadFile } from "../helpers/fileUpload";
 import Article from "../models/article";
+import Comment from "../models/comment";
 import { ArticleServices } from "../services/articleServices";
+import { CommentServices } from "../services/commentServices";
 
 
 export class ArticleController {
@@ -17,6 +19,7 @@ export class ArticleController {
             res.send(article)
 
         } catch (error) {
+            console.log(error);
             res.status(404).send({ error: 'Article no created check provided content' })
         }
     }
@@ -75,6 +78,43 @@ export class ArticleController {
 
 
         } catch (error) {
+            res.status(404).send({ error: "Article doesn't exist!" })
+        }
+    }
+
+    async createComment(req, res, next){
+        try {
+            const article = await ArticleServices.getArticle(req.params.id)
+            if (article) {
+                console.log('---CREATING----');
+                const comment =  new Comment({
+                    sender: req.body.sender,
+                    comment: req.body.comment,
+                    article: req.params.id
+                })
+                console.log('---CREATED DONE----');
+                const savedComment = await CommentServices.createComment(comment)
+                console.log('---COMMENT DONE----');
+                article.comments.push(savedComment)
+                const articleSaved = await ArticleServices.createArticle(article)
+                return res.status(201).send(articleSaved)
+            }
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async commentsOnArticle(req, res, next) {
+        try {
+            const {id} = req.params
+            const article = await ArticleServices.commentsOnArticle(id)
+            res.send(article.comments)
+
+
+        } catch (error) {
+            console.error(error);
             res.status(404).send({ error: "Article doesn't exist!" })
         }
     }

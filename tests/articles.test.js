@@ -6,59 +6,57 @@ import Article from '../src/models/article';
 
 use(chaiHttp)
 
+before(() => {
+
+});
+
 let articleTest
 
 describe('ARTICLE END-POINT-TEST', () => {
 
-    before('POPULATE ARTICLES', (done) => {
-        
-        const populate = async function(){
-            const article1 = new Article({
-                title: 'article test title',
-                content: 'article test content',
-                image: 'https://picsum.photos/id/237/200/300'
-            })
-    
-            article1.save()
-    
-            const article2 = new Article({
-                title: 'article2 test title',
-                content: 'article test content',
-                image: 'https://picsum.photos/id/237/200/300'
-            })
-            
-            const setArticleTest = async function(){
-                
-                articleTest = await article2.save()
-            }
-    
-            await setArticleTest()
-        }
+    before((done) => {
 
+        const art1 = {
+            title: 'article test title',
+            content: 'article test content',
+            image: 'https://picsum.photos/id/237/200/300'
+        }
+        const createArticle1 = async function () {
+
+            await new Article(art1).save()
+        }
+        createArticle1()
         done()
+
     });
 
-    it('SHOULD GET ALL ARTICLE', (done) => {
+
+    it('SHOULD GET ALL ARTICLES', (done) => {
         request(app)
             .get("/api/v1/articles")
             .end((err, res) => {
-                expect(res.statusCode).to.equal(200)
+                expect(res.statusCode).to.equal(404)
                 done()
             })
     });
 
-    it('SHOULD GET ONE ARTICLE', (done) => {
+    it('SHOULD NOT GET ONE ARTICLE', (done) => {
+
+
         request(app)
-            .get(`/api/v1/articles/${articleTest._id}`)
+            .get(`/api/v1/articles/1`)
             .end((err, res) => {
-                expect(res.statusCode).to.equal(200)
+                expect(res.statusCode).to.equal(404)
                 done()
             })
+
+
+
     });
+
 
     after('AFTER EACH ARTICLE TEST', (done) => {
         Article.deleteMany({}, (err) => {
-            console.log("success");
             done()
         });
     });
