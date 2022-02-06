@@ -334,7 +334,12 @@
                 "description": "get comments of an article.",
                 "operationId": "getComments",
                 "parameters": [
-
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Artticle Id",
+                        "required": true
+                    }
                 ],
                 "responses": {
                     "200": {
