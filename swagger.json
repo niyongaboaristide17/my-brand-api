@@ -156,53 +156,8 @@
                         "description": "Success"
                     }
                 }
-            },
-            "patch": {
-                "tags": [
-                    "Articles"
-                ],
-                "summary": "Update Article",
-                "description": "Update An Article",
-                "operationId": "patchArticle",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "Authorization",
-                        "required": true
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Artticle Id",
-                        "required": true
-                    },
-                    {
-                        "name": "title",
-                        "in": "formData",
-                        "description": "title",
-                        "required": true
-                    },
-                    {
-                        "name": "content",
-                        "in": "formData",
-                        "description": "content",
-                        "required": true
-                    },
-                    {
-                        "name": "image",
-                        "in": "formData",
-                        "type": "file",
-                        "description": "image",
-                        "required": false
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
             }
+           
         },
         "/api/v1/articles/{id}": {
             "get": {
@@ -246,6 +201,40 @@
                         "description": "Artticle Id",
                         "required": true
                     }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }, "patch": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Update Article",
+                "description": "Update An Article",
+                "operationId": "patchArticle",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization",
+                        "required": true
+                    },{
+                        "name": "id",
+                        "in": "path",
+                        "description": "Artticle Id",
+                        "required": true
+                    },{
+                        "name": "Article",
+                        "in": "body",
+                        "description": "Article update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Articles"
+                        }
+                    }
+                    
                 ],
                 "responses": {
                     "200": {
@@ -410,6 +399,17 @@
                     "comment":{
                         "type": "string"
                     }
+            }
+        },"Articles":{
+            "type":"object",
+            "properties":{
+                "title":{
+                    "type": "string"
+                },"content":{
+                    "type": "string"
+                },"image":{
+                    "type": "file"
+                }
             }
         }
     }
