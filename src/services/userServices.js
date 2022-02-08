@@ -12,7 +12,7 @@ export class UserServices {
         return await User.findOne({ _id: id })
     }
 
-    static async userExist (email){
+    static async userExist(email) {
         const user = await User.findOne({ email: email })
         if (user) {
             return user
@@ -24,6 +24,14 @@ export class UserServices {
     static async updateUser(id) {
 
     }
-    static async deleteUser(id) {}
+    static async deleteUser(_id) {
+        const removeProfile = await User.deleteOne({ _id });
+        return removeProfile;
+    }
+
+    static async deleteUsers() {
+        const removeAllUsers = await User.deleteMany({});
+        return removeAllUsers;
+    }
 
 }

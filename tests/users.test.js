@@ -22,8 +22,61 @@ describe("USER END-POINT-TEST", () => {
 
   });
 
+  after('AFTER ALL TEST',  ()=> {
+    User.deleteMany({}, (err) => {
+      if (err) {
+        console.log('DATA NOT DELETED');
+      }else{
+        console.log('DATA DELETED');
+      }
+    });
+  });
 
- 
+
+  it("should create user", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        name: 'testUser1',
+        username: 'testusername1',
+        email: 'test@testing1.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        done();
+      });
+  });
+
+  it("should not create user (field validation)", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        username: 'testusername1',
+        email: 'test@testing1.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        done();
+      });
+  });
+
+  it("should not create user", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        name: 'testUser1',
+        username: 'testusername2',
+        email: 'test@testing.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        done();
+      });
+  });
+
   it("should accept user to login", (done) => {
     request(app)
       .post("/api/v1/users/login")
@@ -49,12 +102,5 @@ describe("USER END-POINT-TEST", () => {
         done();
       });
   });
-
-
-  after('AFTER ALL TEST',  () => {
-    User.deleteMany({},  (err) => {
-    });
-  });
-
 
 });
