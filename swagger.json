@@ -225,13 +225,13 @@
                         "in": "path",
                         "description": "Artticle Id",
                         "required": true
-                    },{
-                        "in": "body",
+                    },
+                    {
                         "name": "Article",
-                        "description": "update",
-                        "required": "true",
+                        "in": "body",
+                        "description": "Update Article",
                         "schema": {
-                            "$ref": "#/definitions/Article"
+                            "$ref": "#/definitions/Articles"
                         }
                     }
                     
@@ -400,14 +400,12 @@
                         "type": "string"
                     }
             }
-        },"Article":{
+        },"Articles":{
             "type":"object",
             "properties":{
                 "title":{
                     "type": "string"
                 },"content":{
-                    "type": "string"
-                },"image":{
                     "type": "string"
                 }
             }
