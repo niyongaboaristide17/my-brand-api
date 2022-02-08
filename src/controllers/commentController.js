@@ -8,6 +8,7 @@ export class CommentController {
         try {
 
             const data = await Comment({
+
                 sender: req.body.sender,
                 article: req.body.article,
                 comment: req.body.comment
@@ -38,6 +39,18 @@ export class CommentController {
             res.status(404).send({ error: 'Something went wrong' })
         }
     }
+
+    // async deleteComment(req, res, next) {
+    //     try {
+    //         const comment = await CommentServices.getComment(req.params.id)
+    //         await CommentServices.deleteComment(req.params.id)
+    //         res.status(204).send()
+
+
+    //     } catch (error) {
+    //         res.status(404).send({ error: "Article doesn't exist!" })
+    //     }
+    // }
 
 
 }

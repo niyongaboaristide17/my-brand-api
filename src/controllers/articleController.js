@@ -98,11 +98,17 @@ export class ArticleController {
                 article.comments.push(savedComment)
                 const articleSaved = await ArticleServices.createArticle(article)
                 return res.status(201).send(articleSaved)
+            }else{
+                return res.status(404),send({
+                    messade: 'Article not found'
+                })
             }
             
 
         } catch (error) {
-            console.log(error);
+            return res.status(406),send({
+                messade: 'Something wrong happen'
+            })
         }
     }
 

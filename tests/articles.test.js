@@ -108,5 +108,65 @@ describe('ARTICLE TEST', function () {
 
     });
 
+    describe('END-POINTS TEST', function () {
+        it('(COMMENT NOT AN ARTICLE)', async () => {
+            const article = await ArticleServices.createArticle(new Article({
+                title: 'article service testing',
+                content: 'article test content',
+                image: 'https://picsum.photos/id/237/200/300'
+            }))
+            request(app)
+                .post(`/api/v1/articles/${article._id}/comments`)
+                .send(
+                    {
+                        sender: 'tester',
+                        comment: 'yes yes',
+                    }
+                )
+                .end((err, res) => {
+                    expect(res.statusCode).to.equal(201);
+                    // done();
+                });
+        });
+    });
+
+    describe('END-POINTS TEST', function () {
+        it('(COMMENT AN ARTICLE)', async () => {
+            const article = await ArticleServices.createArticle(new Article({
+                title: 'article service testing',
+                content: 'article test content',
+                image: 'https://picsum.photos/id/237/200/300'
+            }))
+            request(app)
+                .post(`/api/v1/articles/1/comments`)
+                .send(
+                    {
+                        sender: 'tester',
+                        comment: 'yes yes',
+                    }
+                )
+                .end((err, res) => {
+                    expect(res.statusCode).to.equal(404);
+                    // done();
+                });
+        });
+    });
+
+    describe('END-POINTS TEST', function () {
+        it('(GET AN ARTICLE COMMENTS)', async () => {
+            const article = await ArticleServices.createArticle(new Article({
+                title: 'article service testing',
+                content: 'article test content',
+                image: 'https://picsum.photos/id/237/200/300'
+            }))
+            request(app)
+                .get(`/api/v1/articles/${article._id}/comments`)
+                .end((err, res) => {
+                    expect(res.statusCode).to.equal(200);
+                    // done();
+                });
+        });
+    });
+
 
 });

@@ -14,5 +14,7 @@ export class CommentServices {
         console.log(article);
         return article
     }
-
+    // static async deleteComment(id) {
+    //     return await Comment.deleteOne({ _id: id })
+    // }
 }

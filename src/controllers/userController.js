@@ -75,6 +75,4 @@ export class UserController {
             res.status(404).send({error: error})
         }
     }
-    updateUser(req, res, next) {}
-    deleteUser(req, res, next) {}
 }
