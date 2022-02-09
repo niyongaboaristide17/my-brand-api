@@ -4,10 +4,7 @@ export class UserServices {
     static async createUser(data) {
         return await data.save()
     }
-    static async getAllUsers() {
-        const users = await User.find()
-        return users
-    }
+
     static async getUser(id) {
         return await User.findOne({ _id: id })
     }
@@ -20,18 +17,4 @@ export class UserServices {
             return false
         }
     }
-
-    static async updateUser(id) {
-
-    }
-    static async deleteUser(_id) {
-        const removeProfile = await User.deleteOne({ _id });
-        return removeProfile;
-    }
-
-    static async deleteUsers() {
-        const removeAllUsers = await User.deleteMany({});
-        return removeAllUsers;
-    }
-
 }

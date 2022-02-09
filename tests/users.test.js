@@ -22,13 +22,9 @@ describe("USER END-POINT-TEST", () => {
 
   });
 
-  after('AFTER ALL TEST',  ()=> {
+  after('AFTER ALL TEST',  (done)=> {
     User.deleteMany({}, (err) => {
-      if (err) {
-        console.log('DATA NOT DELETED');
-      }else{
-        console.log('DATA DELETED');
-      }
+      done()
     });
   });
 

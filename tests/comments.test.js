@@ -11,21 +11,21 @@ use(chaiHttp)
 
 describe('COMMENT END-POINT-TEST', () => {
 
-    it('SHOULD GET ALL COMMENT', () => {
+    it('SHOULD GET ALL COMMENT', (done) => {
         request(app)
             .get("/api/v1/comments")
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200)
-                // done()
+                done()
             })
     });
 
-    it('SHOULD NOT GET ONE QUERY', () => {
+    it('SHOULD NOT GET ONE QUERY', (done) => {
         request(app)
             .get("/api/v1/comments/1")
             .end((err, res) => {
                 expect(res.statusCode).to.equal(404)
-                // done()
+                done()
             })
     });
 
