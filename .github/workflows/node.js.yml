@@ -12,6 +12,7 @@ env:
   TEST_DB: ${{ secrets.TEST_DB }}
   JWT_SECRETE: ${{ secrets.JWT_SECRETE }}
   JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
+  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
 jobs:
   build:
 
