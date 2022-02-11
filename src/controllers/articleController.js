@@ -106,7 +106,7 @@ export class ArticleController {
             
 
         } catch (error) {
-            return res.status(406),send({
+            return res.status(406).send({
                 messade: 'Something wrong happen'
             })
         }
