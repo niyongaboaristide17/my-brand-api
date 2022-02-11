@@ -176,7 +176,7 @@ describe('ARTICLE TEST', function () {
                 }
             )
             .end((err, res) => {
-                expect(res.statusCode).to.equal(404);
+                expect(res.statusCode).to.equal(406);
                 // done();
             });
     });
