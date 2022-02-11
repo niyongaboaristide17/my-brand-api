@@ -13,6 +13,8 @@ env:
   JWT_SECRETE: ${{ secrets.JWT_SECRETE }}
   JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+  CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
+  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 jobs:
   build:
 
