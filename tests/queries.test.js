@@ -99,6 +99,24 @@ describe('QUERY END-POINT-TEST', () => {
             })
     });
 
+    it('SHOULD UPDATE ONE QUERY', (done) => {
+        
+        request(app)
+            .patch(`/api/v1/queries/${queryTest._id}`)
+            .send({
+                sender: {
+                    name: "Messi",
+                    email: "mmm@mm.test"
+                },
+                message: "message",
+                location: "kibungo"
+            })
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(200)
+                done()
+            })
+    });
+
     it('SHOULD DELETE ONE QUERY', (done) => {
         request(app)
             .delete(`/api/v1/queries/${queryTest2._id}`)
