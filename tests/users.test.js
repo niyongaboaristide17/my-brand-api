@@ -13,7 +13,7 @@ describe("USER END-POINT-TEST", () => {
   before('BEFORE ALL TEST', async () => {
     const user = {
       name: 'testUser',
-      username: 'testusername',
+      // username: 'testusername',
       email: 'test@testing.com',
       password: hashPassword('@Test12345')
     }
@@ -34,7 +34,7 @@ describe("USER END-POINT-TEST", () => {
       .post("/api/v1/users")
       .send({
         name: 'testUser1',
-        username: 'testusername1',
+        // username: 'testusername1',
         email: 'test@testing1.com',
         password: '@Test12345'
       })
@@ -48,7 +48,8 @@ describe("USER END-POINT-TEST", () => {
     request(app)
       .post("/api/v1/users")
       .send({
-        username: 'testusername1',
+        name: 'testUser1',
+        // username: 'testusername1',
         email: 'test@testing1.com',
         password: '@Test12345'
       })
@@ -63,7 +64,7 @@ describe("USER END-POINT-TEST", () => {
       .post("/api/v1/users")
       .send({
         name: 'testUser1',
-        username: 'testusername2',
+        // username: 'testusername2',
         email: 'test@testing.com',
         password: '@Test12345'
       })

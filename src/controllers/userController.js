@@ -21,7 +21,7 @@ export class UserController {
             }else{
                 const user = await new User({
                     name: req.body.name,
-                    username: req.body.username,
+                    // username: req.body.username,
                     password: hashPassword(req.body.password),
                     email: req.body.email
                 })

@@ -101,14 +101,14 @@ describe('ARTICLE TEST', function () {
             });
     });
 
-    it('(GET ONE ARTICLES)', async () => {
-        const article = await Article.findOne({ title: 'article 2' })
-        request(app)
-            .get(`/api/v1/articles/${article._id}`)
-            .end((err, res) => {
-                expect(res.statusCode).to.equal(200);
-            });
-    });
+    // it('(GET ONE ARTICLES)', async () => {
+    //     const article = await Article.findOne({ title: 'article 2' })
+    //     request(app)
+    //         .get(`/api/v1/articles/${article._id}`)
+    //         .end((err, res) => {
+    //             expect(res.statusCode).to.equal(200);
+    //         });
+    // });
 
     it('(GET NOT ONE ARTICLE)', async () => {
         request(app)
