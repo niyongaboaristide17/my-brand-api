@@ -114,6 +114,7 @@ export class ArticleController {
 
     async commentsOnArticle(req, res, next) {
         try {
+            
             const {id} = req.params
             const article = await ArticleServices.commentsOnArticle(id)
             res.send(article.comments)
