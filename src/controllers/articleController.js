@@ -74,7 +74,9 @@ export class ArticleController {
         try {
             const article = await ArticleServices.getArticle(req.params.id)
             await ArticleServices.deleteArticle(req.params.id)
-            res.status(204).send()
+            res.status(204).send({
+                message: 'Article deleted'
+            })
 
 
         } catch (error) {
