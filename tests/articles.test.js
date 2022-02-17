@@ -57,7 +57,8 @@ describe('ARTICLE TEST', function () {
         request(app)
             .patch(`/api/v1/articles/${article._id}`)
             .set('Authorization', `Bearer ${tokenAuth}`)
-            .send(article1)
+            .attach('image', './public/Screenshot from 2022-02-02 11-51-57.png', 'status.png')
+            .field(article1)
             .end((err, res)=>{
                 expect(res.statusCode).to.equal(200)
 

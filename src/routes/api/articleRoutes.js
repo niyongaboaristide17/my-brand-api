@@ -16,8 +16,7 @@ route.post('/', authenticate, upload.single('image'), articleValidation, new Art
 route.get('/:id', new ArticleController().getArticle)
 route.get('/:id/comments', new ArticleController().commentsOnArticle)
 route.post('/:id/comments', new ArticleController().createComment)
-route.patch('/:id',authenticate, articleValidation, new ArticleController().updateArticle)
-
+route.patch('/:id',authenticate,  upload.single('image'),articleValidation, new ArticleController().updateArticle)
 route.delete('/:id',authenticate, new ArticleController().deleteArticle)
 
 export default route

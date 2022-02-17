@@ -49,14 +49,17 @@ export class ArticleController {
     async updateArticle(req, res, next) {
         try {
 
-            const data = {}
+ 
+            let data = {}
+            req.body.image = await uploadFile(req)
+
             if (req.body.title) {
                 data['title'] = req.body.title
             }
             if (req.body.content) {
                 data['content'] = req.body.content
             }
-            if (req.body.image) {
+            if (req.body.image && req.body.image != "") {
                 data['image'] = req.body.image
             }
 
@@ -64,9 +67,11 @@ export class ArticleController {
                 data['likes'] = req.body.likes
             }
 
+            console.log(data);
             const article = await ArticleServices.updateArticle(req.params.id, data)
             res.send(article)
         } catch (error) {
+            console.log(error);
             res.status(404).send({ error: "Article doesn't exist!" })
         }
     }
