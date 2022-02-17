@@ -1,9 +1,10 @@
 import express from 'express'
 import { QueryController } from '../../controllers/queriesController'
+import { authenticate } from '../../middlewares/authenticate';
 
 const route = express.Router()
 
-route.get('/', new QueryController().getAllQueries)
+route.get('/',authenticate, new QueryController().getAllQueries)
 
 route.post('/', new QueryController().createQuery)
 
