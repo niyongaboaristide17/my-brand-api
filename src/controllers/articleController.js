@@ -51,16 +51,16 @@ export class ArticleController {
 
  
             let data = {}
-            req.body.image = await uploadFile(req)
-
+            
+            if (req.file) {
+                req.body.image = await uploadFile(req)
+                data['image'] = req.body.image
+            }
             if (req.body.title) {
                 data['title'] = req.body.title
             }
             if (req.body.content) {
                 data['content'] = req.body.content
-            }
-            if (req.body.image && req.body.image != "") {
-                data['image'] = req.body.image
             }
 
             if (req.body.likes) {
