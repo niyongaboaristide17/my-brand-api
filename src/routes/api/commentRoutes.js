@@ -9,4 +9,6 @@ route.post('/', new CommentController().createComment)
 
 route.get('/:id', new CommentController().getComment)
 
+// route.get('/:id', new CommentController().deleteComment)
+
 export default route

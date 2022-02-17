@@ -13,7 +13,7 @@ describe("USER END-POINT-TEST", () => {
   before('BEFORE ALL TEST', async () => {
     const user = {
       name: 'testUser',
-      username: 'testusername',
+      // username: 'testusername',
       email: 'test@testing.com',
       password: hashPassword('@Test12345')
     }
@@ -22,8 +22,58 @@ describe("USER END-POINT-TEST", () => {
 
   });
 
+  after('AFTER ALL TEST',  (done)=> {
+    User.deleteMany({}, (err) => {
+      done()
+    });
+  });
 
- 
+
+  it("should create user", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        name: 'testUser1',
+        // username: 'testusername1',
+        email: 'test@testing1.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        done();
+      });
+  });
+
+  it("should not create user (field validation)", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        name: 'testUser1',
+        // username: 'testusername1',
+        email: 'test@testing1.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        done();
+      });
+  });
+
+  it("should not create user", (done) => {
+    request(app)
+      .post("/api/v1/users")
+      .send({
+        name: 'testUser1',
+        // username: 'testusername2',
+        email: 'test@testing.com',
+        password: '@Test12345'
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        done();
+      });
+  });
+
   it("should accept user to login", (done) => {
     request(app)
       .post("/api/v1/users/login")
@@ -49,12 +99,5 @@ describe("USER END-POINT-TEST", () => {
         done();
       });
   });
-
-
-  after('AFTER ALL TEST',  () => {
-    User.deleteMany({},  (err) => {
-    });
-  });
-
 
 });

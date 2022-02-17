@@ -10,6 +10,8 @@ let queryTest
 
 let queryTest2
 
+var tokenAuth = process.env.JWT_TOKEN
+
 describe('QUERY END-POINT-TEST', () => {
 
     before('POPULATE QUERY', (done) => {
@@ -75,6 +77,7 @@ describe('QUERY END-POINT-TEST', () => {
     it('SHOULD GET ALL QUERY', (done) => {
         request(app)
             .get("/api/v1/queries")
+            .set('Authorization', `Bearer ${tokenAuth}`)
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200)
                 done()
@@ -93,6 +96,24 @@ describe('QUERY END-POINT-TEST', () => {
     it('SHOULD GET ONE QUERY', (done) => {
         request(app)
             .get(`/api/v1/queries/${queryTest._id}`)
+            .end((err, res) => {
+                expect(res.statusCode).to.equal(200)
+                done()
+            })
+    });
+
+    it('SHOULD UPDATE ONE QUERY', (done) => {
+        
+        request(app)
+            .patch(`/api/v1/queries/${queryTest._id}`)
+            .send({
+                sender: {
+                    name: "Messi",
+                    email: "mmm@mm.test"
+                },
+                message: "message",
+                location: "kibungo"
+            })
             .end((err, res) => {
                 expect(res.statusCode).to.equal(200)
                 done()

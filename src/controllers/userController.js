@@ -21,7 +21,7 @@ export class UserController {
             }else{
                 const user = await new User({
                     name: req.body.name,
-                    username: req.body.username,
+                    // username: req.body.username,
                     password: hashPassword(req.body.password),
                     email: req.body.email
                 })
@@ -75,6 +75,4 @@ export class UserController {
             res.status(404).send({error: error})
         }
     }
-    updateUser(req, res, next) {}
-    deleteUser(req, res, next) {}
 }

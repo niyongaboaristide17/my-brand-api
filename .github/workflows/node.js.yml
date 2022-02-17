@@ -11,6 +11,12 @@ on:
 env: 
   TEST_DB: ${{ secrets.TEST_DB }}
   JWT_SECRETE: ${{ secrets.JWT_SECRETE }}
+  JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
+  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+  CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
+  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+  CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+
 jobs:
   build:
 
@@ -18,7 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [12.x,14.x,16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:

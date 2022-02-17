@@ -49,24 +49,29 @@ export class ArticleController {
     async updateArticle(req, res, next) {
         try {
 
-            const data = {}
+ 
+            let data = {}
+            
+            if (req.file) {
+                req.body.image = await uploadFile(req)
+                data['image'] = req.body.image
+            }
             if (req.body.title) {
                 data['title'] = req.body.title
             }
             if (req.body.content) {
                 data['content'] = req.body.content
             }
-            if (req.body.image) {
-                data['image'] = req.body.image
-            }
 
             if (req.body.likes) {
                 data['likes'] = req.body.likes
             }
 
+            console.log(data);
             const article = await ArticleServices.updateArticle(req.params.id, data)
             res.send(article)
         } catch (error) {
+            console.log(error);
             res.status(404).send({ error: "Article doesn't exist!" })
         }
     }
@@ -74,7 +79,9 @@ export class ArticleController {
         try {
             const article = await ArticleServices.getArticle(req.params.id)
             await ArticleServices.deleteArticle(req.params.id)
-            res.status(204).send()
+            res.status(204).send({
+                message: 'Article deleted'
+            })
 
 
         } catch (error) {
@@ -98,16 +105,23 @@ export class ArticleController {
                 article.comments.push(savedComment)
                 const articleSaved = await ArticleServices.createArticle(article)
                 return res.status(201).send(articleSaved)
+            }else{
+                return res.status(404),send({
+                    messade: 'Article not found'
+                })
             }
             
 
         } catch (error) {
-            console.log(error);
+            return res.status(406).send({
+                messade: 'Something wrong happen'
+            })
         }
     }
 
     async commentsOnArticle(req, res, next) {
         try {
+            
             const {id} = req.params
             const article = await ArticleServices.commentsOnArticle(id)
             res.send(article.comments)
